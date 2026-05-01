@@ -1,25 +1,27 @@
-// $(document).ready(function(){
-//     $("p").mouseenter(function(){
-//         $(this).css("color", "#00F");
-//     }),
-//     $(".prposition").click(function(){
-//         $(".prposition-text").slideDown();
-//     }) 
-// } )
-let mytext = 'Quelque fois on a besoin de dire des choses difficiles, mais on devrait tâcher de mes dore aisso simplement que l\'on peut. \n \"Hardy\" ',
-i = 0;
-let parol = document.getElementById('parol');
-let myName = document.getElementById('myName');
+const quoteTarget = document.getElementById("parol");
+const authorTrigger = document.getElementById("myName");
+const quoteText =
+  'Quelquefois, on a besoin de dire des choses difficiles, mais on devrait tâcher de les dire aussi simplement que possible. "Hardy"';
 
-myName.onclick = function () {
-    'use strict';
-    var typWrite = setInterval(function(){
-        parol.textContent += mytext[i];
-        i = i + 1;
-        if(i>mytext.length - 1) {
-            clearInterval(typWrite);
-        };
-        // parol.style.color = "red";
-        // parol.style.fontFamily = "Algerian"
-    },100 );
+if (quoteTarget && authorTrigger) {
+  let timerId = null;
+
+  authorTrigger.addEventListener("click", () => {
+    if (timerId) {
+      window.clearInterval(timerId);
+    }
+
+    let index = 0;
+    quoteTarget.textContent = "";
+
+    timerId = window.setInterval(() => {
+      quoteTarget.textContent += quoteText[index];
+      index += 1;
+
+      if (index >= quoteText.length) {
+        window.clearInterval(timerId);
+        timerId = null;
+      }
+    }, 28);
+  });
 }
